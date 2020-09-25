@@ -34,18 +34,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String username = null;
 		String jwtToken = null;
-		// Phai bat dau voi "Bearer"
+		// start with "Bearer"
 		if (requestTokenHeader != null) {
-			jwtToken = requestTokenHeader.substring(7);
+//			jwtToken = requestTokenHeader.substring(7);
+			jwtToken = requestTokenHeader;
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Unable to get JWT Token");
+				System.out.println("khong nhan duoc token");
 			} catch (ExpiredJwtException e) {
-				System.out.println("JWT Token has expired");
+				System.out.println("JWT Token expired");
 			}
 		} else {
-			logger.warn("Viet sau");
+			logger.warn("token khong hop le");
 		}
 
 		//Xac thuc token khi nhan duoc ma
@@ -62,7 +63,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				// After setting the Authentication in the context, we specify
 				// that the current user is authenticated. So it passes the Spring Security Configurations successfully.
-				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);//set role(authorities)
 			}
 		}
 		//neu hop le thi chuyen den filter tiep theo

@@ -44,15 +44,22 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 //save user
 	public User save(UserDto user) {
-		User newUser = new User();
-		newUser.setUsername(user.getUsername());
-		//save role default
+		User u = userRepository.findByUsername(user.getUsername());
+
+		if (u != null) {
+			//loi tai khoan da ton tai(viet tam)
+			throw new UsernameNotFoundException("abc");
+		} else {
+			User newUser = new User();
+			newUser.setUsername(user.getUsername());
+			//save role default
 
 
-		//default = user
-		newUser.setRoles(roleRepository.findAllById(Collections.singleton(2)));
+			//default = user
+			newUser.setRoles(roleRepository.findAllById(Collections.singleton(2)));
 
-		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return userRepository.save(newUser);
+			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+			return userRepository.save(newUser);
+		}
 	}
 }

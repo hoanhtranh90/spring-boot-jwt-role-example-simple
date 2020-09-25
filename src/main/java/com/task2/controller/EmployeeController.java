@@ -1,18 +1,18 @@
 package com.task2.controller;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin()
 public class EmployeeController {
-    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+//    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+    @GetMapping("/greeting")
     public List<GrantedAuthority> getEmployees() {
+
+        //get authorities
         return ((List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
 
