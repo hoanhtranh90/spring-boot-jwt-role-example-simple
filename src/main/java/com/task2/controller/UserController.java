@@ -1,5 +1,6 @@
 package com.task2.controller;
 
+import com.task2.model.Role;
 import com.task2.model.User;
 import com.task2.repository.UserRepository;
 import com.task2.service.UserService;
@@ -25,7 +26,12 @@ public class UserController {
     }
     //demo: http://localhost:3000/user/66
 
-
+    @GetMapping("/role")
+    Page<User> findUserByRole(@RequestParam(value = "name", required = false) String role,
+                              Pageable pageable) {
+        return userService.findUserByRole(role,pageable);
+    }
+    //demo: http://localhost:8000/user/role?name=user&size=1
 
     @GetMapping()
     Page<User> employeesPageable(Pageable pageable) {

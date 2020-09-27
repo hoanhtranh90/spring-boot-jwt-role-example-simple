@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// nhung request tu url duoc truy cap
 				.authorizeRequests()
 				.antMatchers("/authenticate", "/register").permitAll()
-				.antMatchers("/user/**").hasAuthority("admin")
+				.antMatchers("/user/**","/user/role/**").hasAuthority("admin")
 				.antMatchers("/greeting").hasAnyAuthority("admin","user")
 
 				// tat ca request con lai phai xac thuc

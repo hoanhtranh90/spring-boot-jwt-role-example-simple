@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
-    @Query("select u from User u where u.username like %:username")
-//    Page<Osp_user> findByFirstnameEndsWith(Pageable pageable,String name);
+    @Query("select u from User u where u.username like %:username%")
     Page<User> findByFirstnameEndsWith(String username, final Pageable pageable);
 
 

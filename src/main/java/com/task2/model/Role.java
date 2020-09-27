@@ -34,6 +34,9 @@ public class Role{
 
     }
 
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public void setId(int id){
         this.id = id;
