@@ -22,8 +22,8 @@ public class User {
     //an password khi bi goi user
     @JsonIgnore
     private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//cascade = CascadeType.PERSIST khi xóa user sẽ xóa cả user_role
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name="users_roles",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}

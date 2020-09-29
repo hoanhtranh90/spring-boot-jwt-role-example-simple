@@ -34,7 +34,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String username = null;
 		String jwtToken = null;
-		// start with "Bearer"
 		if (requestTokenHeader != null) {
 //			jwtToken = requestTokenHeader.substring(7);
 			jwtToken = requestTokenHeader;
@@ -43,18 +42,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			} catch (IllegalArgumentException e) {
 				System.out.println("khong nhan duoc token");
 			} catch (ExpiredJwtException e) {
-				System.out.println("JWT Token expired");
+				System.out.println("JWT không hợp lệ");
 			}
 		} else {
-			logger.warn("token khong hop le");
+			logger.warn("khong co token");
 		}
 
 		//Xac thuc token khi nhan duoc ma
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
+//SecurityContextHolder.getContext().getAuthentication():  lay quyen user
 			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 			
-			// neu token dung thi thuc hien cau hinh, tra ve info
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

@@ -63,13 +63,12 @@ public class JwtTokenUtil implements Serializable {
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 
-		//add role to payload :: có hay không vẫn hoạt động
 		Set<String> Userroles = new HashSet<>();
-		User user = userRepository.findByUsername(userDetails.getUsername());
-		for(Role role:user.getRoles()){
-			Userroles.add(role.getRole());
-		}
-		claims.put("Roles",Userroles.toArray());
+//		User user = userRepository.findByUsername(userDetails.getUsername());
+//		for(Role role:user.getRoles()){
+//			Userroles.add(role.getRole());
+//		}
+//		claims.put("Roles",Userroles.toArray());
 
 		return doGenerateToken(claims, userDetails.getUsername());
 	}

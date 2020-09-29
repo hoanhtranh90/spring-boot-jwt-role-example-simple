@@ -47,7 +47,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		User u = userRepository.findByUsername(user.getUsername());
 
 		if (u != null) {
-			//loi tai khoan da ton tai(viet tam)
+			//loi tai khoan da ton tai
 			throw new UsernameNotFoundException("abc");
 		} else {
 			User newUser = new User();

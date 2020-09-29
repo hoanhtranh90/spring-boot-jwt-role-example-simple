@@ -7,6 +7,10 @@ import com.task2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -38,6 +42,7 @@ public class UserController {
         return userService.showDataPage(pageable);
     }
     //demo: http://localhost:3000/user?page=1&size=5&sort=first_name
+
 
 
     @GetMapping("/seach")
